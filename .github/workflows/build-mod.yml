@@ -42,10 +42,10 @@ jobs:
           arguments: build
 
       - name: Compress build files
-        run: 'tar –czf build-result.tar.gz ./build/libs/*'
+        run: 'tar -czf BuildResult.tar.gz ./build/libs/*'
 
       - name: 'Upload Artifact'
         uses: actions/upload-artifact@v3
         with:
           name: 'Build Result'
-          path: build-result.tar.gz
+          path: BuildResult.tar.gz

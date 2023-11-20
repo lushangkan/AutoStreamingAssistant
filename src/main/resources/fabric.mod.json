@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "autofullscreen",
+  "version": "${version}",
+  "name": "AutoFullScreen",
+  "description": "Automatically displays the game in full screen on the specified screen.",
+  "authors": [
+    "lushangkan"
+  ],
+  "contact": {
+    "website": "https://cutemc.cn",
+    "repo": "https://github.com/lushangkan/AutoFullScreen"
+  },
+  "license": "GPL-3.0",
+  "icon": "assets/autofullscreen/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "cn.cutemc.autofullscreen.AutoFullScreen"
+    ],
+    "modmenu": [
+      "cn.cutemc.autofullscreen.config.ConfigMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "autofullscreen.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}

@@ -50,11 +50,16 @@ The config file is located in `.minecraft/config/autofullscreen.json`.
 
 Or you can use the mod's config screen to change the config.
 
+### System Quirks：
+
+#### Linux Mint:
+
+Because Cinnamon handles window minimization differently than other desktop environments, on Linux Mint it is not possible to prevent manual minimization by the user, only automatic minimization by Cinnamon.
+
 ---
 
 ### Support me and buy me a coffee!
 
-<br>
 
 <a href="https://afdian.net/a/lushangkan"><img src="https://s2.loli.net/2023/11/21/iAuWGhQz4gFpalV.jpg" alt="afdian" width="300"/></a>
 

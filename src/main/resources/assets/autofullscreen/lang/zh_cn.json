@@ -1,0 +1,7 @@
+{
+  "text.autoconfig.autofullscreen.title": "Auto Fullscreen",
+  "text.autoconfig.autofullscreen.option.autoFullScreen": "启动时自动全屏",
+  "text.autoconfig.autofullscreen.option.fullScreenMonitorName": "要全屏的屏幕名称",
+  "text.autoconfig.autofullscreen.option.keepMaximizing": "保持窗口最大化",
+  "text.autoconfig.autofullscreen.option.keepFullScreen": "保持窗口全屏"
+}

@@ -1,0 +1,7 @@
+{
+  "text.autoconfig.autofullscreen.title": "Auto Fullscreen",
+  "text.autoconfig.autofullscreen.option.autoFullScreen": "Automatic full screen at startup",
+  "text.autoconfig.autofullscreen.option.fullScreenMonitorName": "Name of the screen to be full-screened",
+  "text.autoconfig.autofullscreen.option.keepMaximizing": "Keep the window maximized",
+  "text.autoconfig.autofullscreen.option.keepFullScreen": "Keep the window full screen"
+}

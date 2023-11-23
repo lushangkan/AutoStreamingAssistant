@@ -3,6 +3,8 @@
 
 A Fabric Mod to make the game start up full screen on a given screen for Minecraft 1.20.2.
 
+[中文版](LICENSE)
+
 ### Mod Functions:
 
 - Automatic full screen when starting a game

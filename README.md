@@ -56,6 +56,14 @@ Or you can use the mod's config screen to change the config.
 
 Because Cinnamon handles window minimization differently than other desktop environments, on Linux Mint it is not possible to prevent manual minimization by the user, only automatic minimization by Cinnamon.
 
+## Precautions:
+- This Mod depends on Fabric API, Cloth-Conf
+- This Mod has only been tested on Minecraft 1.20.2 version, other versions have not been tested
+
+## License:
+This project uses GPLv3 license, please refer to [LICENSE](LICENSE) file for details.
+
+
 ---
 
 ### Support me and buy me a coffee!

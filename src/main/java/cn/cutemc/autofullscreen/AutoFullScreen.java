@@ -1,5 +1,6 @@
 package cn.cutemc.autofullscreen;
 
+import cn.cutemc.autofullscreen.commands.ModCommands;
 import cn.cutemc.autofullscreen.config.ModConfig;
 import cn.cutemc.autofullscreen.utils.SystemUtils;
 import lombok.extern.log4j.Log4j2;
@@ -26,6 +27,9 @@ public class AutoFullScreen implements ClientModInitializer {
 
         log.info("Loading Config...");
         CONFIG = new ModConfig();
+
+        log.info("Registering Commands...");
+        new ModCommands();
 
         log.info("AutoFullScreen Loaded!");
 

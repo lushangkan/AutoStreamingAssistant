@@ -12,6 +12,12 @@
 
 ### 获取窗口名称：
 
+#### 游戏中:
+
+在游戏中运行这行命令:
+
+    /autofullscreen listmonitor
+
 #### Linux:
 
 在终端中运行这个命令：

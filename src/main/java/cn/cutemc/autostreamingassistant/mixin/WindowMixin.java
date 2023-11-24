@@ -1,6 +1,6 @@
-package cn.cutemc.autofullscreen.mixin;
+package cn.cutemc.autostreamingassistant.mixin;
 
-import cn.cutemc.autofullscreen.AutoFullScreen;
+import cn.cutemc.autostreamingassistant.AutoStreamingAssistant;
 import lombok.extern.log4j.Log4j2;
 import net.minecraft.client.WindowEventHandler;
 import net.minecraft.client.WindowSettings;
@@ -24,7 +24,7 @@ public class WindowMixin {
 
         long result = defPointer;
 
-        if (!AutoFullScreen.CONFIG.mainConfig.fullScreenMonitorName.equals("")) {
+        if (!AutoStreamingAssistant.CONFIG.mainConfig.fullScreenMonitorName.equals("")) {
             // 如果配置文件中指定了全屏显示器的名称
 
             PointerBuffer buffer = GLFW.glfwGetMonitors();
@@ -35,16 +35,16 @@ public class WindowMixin {
                     long pointer1 = buffer.get(i);
                     String name = GLFW.glfwGetMonitorName(pointer1);
 
-                    if (name != null && name.equals(AutoFullScreen.CONFIG.mainConfig.fullScreenMonitorName)) {
-                        log.info("Found monitor with name " + AutoFullScreen.CONFIG.mainConfig.fullScreenMonitorName);
+                    if (name != null && name.equals(AutoStreamingAssistant.CONFIG.mainConfig.fullScreenMonitorName)) {
+                        log.info("Found monitor with name " + AutoStreamingAssistant.CONFIG.mainConfig.fullScreenMonitorName);
                         result = pointer1;
                         changed = true;
                         break;
                     }
                 }
 
-                if (!changed && !AutoFullScreen.CONFIG.mainConfig.fullScreenMonitorName.equals("")) {
-                    log.warn("Could not find monitor with name " + AutoFullScreen.CONFIG.mainConfig.fullScreenMonitorName);
+                if (!changed && !AutoStreamingAssistant.CONFIG.mainConfig.fullScreenMonitorName.equals("")) {
+                    log.warn("Could not find monitor with name " + AutoStreamingAssistant.CONFIG.mainConfig.fullScreenMonitorName);
                     log.warn("Using primary monitor instead");
                 }
             }
@@ -55,14 +55,14 @@ public class WindowMixin {
 
     @Inject(method = "<init>(Lnet/minecraft/client/WindowEventHandler;Lnet/minecraft/client/util/MonitorTracker;Lnet/minecraft/client/WindowSettings;Ljava/lang/String;Ljava/lang/String;)V", at = @At(value = "INVOKE", target = "Lorg/lwjgl/glfw/GLFW;glfwCreateWindow(IILjava/lang/CharSequence;JJ)J", shift = At.Shift.BEFORE))
     private void createWindowInject(WindowEventHandler eventHandler, MonitorTracker monitorTracker, WindowSettings settings, String videoMode, String title, CallbackInfo ci) {
-        if (AutoFullScreen.CONFIG.mainConfig.keepMaximizing) {
+        if (AutoStreamingAssistant.CONFIG.mainConfig.keepMaximizing) {
             GLFW.glfwWindowHint(GLFW.GLFW_AUTO_ICONIFY, GLFW.GLFW_FALSE);
         }
     }
 
     @ModifyVariable(method = "onWindowFocusChanged(JZ)V", at = @At("HEAD"), ordinal = 0, argsOnly = true)
     private boolean onWindowFocusChangedInject(boolean focused) {
-        if (AutoFullScreen.CONFIG.mainConfig.keepMaximizing) {
+        if (AutoStreamingAssistant.CONFIG.mainConfig.keepMaximizing) {
             return true;
         }
 
@@ -71,12 +71,12 @@ public class WindowMixin {
 
     @Inject(method = "<init>(Lnet/minecraft/client/WindowEventHandler;Lnet/minecraft/client/util/MonitorTracker;Lnet/minecraft/client/WindowSettings;Ljava/lang/String;Ljava/lang/String;)V", at = @At(value = "RETURN"))
     private void constructorInject(WindowEventHandler eventHandler, MonitorTracker monitorTracker, WindowSettings settings, String videoMode, String title, CallbackInfo ci) {
-        AutoFullScreen.windowTitle = title;
+        AutoStreamingAssistant.windowTitle = title;
     }
 
     @Inject(method = "setTitle(Ljava/lang/String;)V", at = @At(value = "HEAD"))
     private void setTitleInject(String title, CallbackInfo ci) {
-        AutoFullScreen.windowTitle = title;
+        AutoStreamingAssistant.windowTitle = title;
     }
 
 }

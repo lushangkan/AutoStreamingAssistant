@@ -1,0 +1,23 @@
+{
+  "text.autoconfig.autostreamingassistant.title": "Auto Streaming Assistant",
+  "text.autoconfig.autostreamingassistant.option.autoFullScreen": "Automatic full screen at startup",
+  "text.autoconfig.autostreamingassistant.option.fullScreenMonitorName": "Name of the screen to be full-screened",
+  "text.autoconfig.autostreamingassistant.option.keepMaximizing": "Keep the window maximized",
+  "text.autoconfig.autostreamingassistant.option.keepFullScreen": "Keep the window full screen",
+  "text.autoconfig.autostreamingassistant.option.disableMouseLock": "Disable mouse lock",
+  "commands.autostreamingassistant.help.title": "Auto Streaming Assistant commands",
+  "commands.autostreamingassistant.help.help.description": "Show this help message",
+  "commands.autostreamingassistant.help.listmonitor.description": "List all monitors",
+  "commands.autostreamingassistant.help.listmonitor.notfound": "No monitor found",
+  "commands.autostreamingassistant.listmonitor.title": "List of monitors",
+  "commands.autostreamingassistant.listmonitor.monitor": "Monitor",
+  "commands.autostreamingassistant.listmonitor.unknown": "Unknown",
+  "commands.autostreamingassistant.listmonitor.primary": "Primary",
+  "commands.autostreamingassistant.listmonitor.name": "Name",
+  "commands.autostreamingassistant.listmonitor.width": "Width",
+  "commands.autostreamingassistant.listmonitor.height": "Height",
+  "commands.autostreamingassistant.listmonitor.width.error": "Cannot get resolution",
+  "commands.autostreamingassistant.listmonitor.height.error": "Cannot get resolution",
+  "key.autostreamingassistant.category": "Auto Streaming Assistant",
+  "key.autostreamingassistant.togglelockmouse": "Toggle mouse lock"
+}

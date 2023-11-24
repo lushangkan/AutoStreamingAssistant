@@ -1,6 +1,6 @@
-package cn.cutemc.autofullscreen.mixin;
+package cn.cutemc.autostreamingassistant.mixin;
 
-import cn.cutemc.autofullscreen.AutoFullScreen;
+import cn.cutemc.autostreamingassistant.AutoStreamingAssistant;
 import lombok.extern.log4j.Log4j2;
 import net.minecraft.client.MinecraftClient;
 import org.lwjgl.glfw.GLFW;
@@ -18,12 +18,12 @@ public class MinecraftClientMixin {
         MinecraftClient client = (MinecraftClient) (Object) this;
         long windowId = client.getWindow().getHandle();
 
-        if (AutoFullScreen.CONFIG.mainConfig.keepMaximizing && !AutoFullScreen.isLinuxMint && GLFW.glfwGetWindowAttrib(windowId, GLFW.GLFW_ICONIFIED) == 1) {
+        if (AutoStreamingAssistant.CONFIG.mainConfig.keepMaximizing && !AutoStreamingAssistant.isLinuxMint && GLFW.glfwGetWindowAttrib(windowId, GLFW.GLFW_ICONIFIED) == 1) {
             // 如果窗口最小化了,非LinuxMint系统
             GLFW.glfwRestoreWindow(windowId);
         }
 
-        if (AutoFullScreen.CONFIG.mainConfig.keepFullScreen && !client.getWindow().isFullscreen()) {
+        if (AutoStreamingAssistant.CONFIG.mainConfig.keepFullScreen && !client.getWindow().isFullscreen()) {
             // 如果窗口不是全屏的
             client.getWindow().toggleFullscreen();
             client.options.getFullscreen().setValue(true);

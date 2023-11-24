@@ -1,7 +1,6 @@
-# AutoFullScreen
+# AutoStreamingAssistant
 
-
-A Fabric Mod to make the game start up full screen on a given screen for Minecraft 1.20.2.
+A Minecraft Fabric Automated Live Streaming Assistant Mod.
 
 [中文版](README_ZH.md)
 
@@ -19,7 +18,7 @@ A Fabric Mod to make the game start up full screen on a given screen for Minecra
 
 Run command in game:
 
-    /autofullscreen listmonitor
+    /autostreamingassistant listmonitor
 
 #### Linux:
 

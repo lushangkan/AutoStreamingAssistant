@@ -1,0 +1,23 @@
+{
+  "text.autoconfig.autostreamingassistant.title": "Auto Streaming Assistant",
+  "text.autoconfig.autostreamingassistant.option.autoFullScreen": "启动时自动全屏",
+  "text.autoconfig.autostreamingassistant.option.fullScreenMonitorName": "要全屏的屏幕名称",
+  "text.autoconfig.autostreamingassistant.option.keepMaximizing": "保持窗口最大化",
+  "text.autoconfig.autostreamingassistant.option.keepFullScreen": "保持窗口全屏",
+  "text.autoconfig.autostreamingassistant.option.disableMouseLock": "禁用鼠标锁定",
+  "commands.autostreamingassistant.help.title": "Auto Streaming Assistant 帮助",
+  "commands.autostreamingassistant.help.help.description": "显示帮助信息",
+  "commands.autostreamingassistant.help.listmonitor.description": "列出显示器",
+  "commands.autostreamingassistant.help.listmonitor.notfound": "找不到显示器",
+  "commands.autostreamingassistant.listmonitor.title": "显示器列表",
+  "commands.autostreamingassistant.listmonitor.monitor": "显示器",
+  "commands.autostreamingassistant.listmonitor.unknown": "未知",
+  "commands.autostreamingassistant.listmonitor.primary": "主显示器",
+  "commands.autostreamingassistant.listmonitor.name": "名称",
+  "commands.autostreamingassistant.listmonitor.width": "高度",
+  "commands.autostreamingassistant.listmonitor.height": "宽度",
+  "commands.autostreamingassistant.listmonitor.width.error": "无法获取分辨率",
+  "commands.autostreamingassistant.listmonitor.height.error": "无法获取分辨率",
+  "key.autostreamingassistant.category": "Auto Streaming Assistant",
+  "key.autostreamingassistant.togglelockmouse": "切换鼠标锁定"
+}

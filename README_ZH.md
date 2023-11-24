@@ -1,6 +1,6 @@
-# AutoFullScreen
+# AutoStreamingAssistant
 
-一个Fabric Mod，用于使游戏在指定的屏幕上以全屏模式启动，适用于Minecraft 1.20.2版本。
+一个Fabric Mod，使自动直播Minecraft变得更加简单，适用于Minecraft 1.20.2版本。
 
 ### Mod功能：
 
@@ -16,7 +16,7 @@
 
 在游戏中运行这行命令:
 
-    /autofullscreen listmonitor
+    /autostreamingassistant listmonitor
 
 #### Linux:
 

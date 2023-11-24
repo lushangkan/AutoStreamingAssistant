@@ -1,4 +1,4 @@
-package cn.cutemc.autofullscreen.utils;
+package cn.cutemc.autostreamingassistant.utils;
 
 import lombok.SneakyThrows;
 import org.apache.commons.exec.CommandLine;

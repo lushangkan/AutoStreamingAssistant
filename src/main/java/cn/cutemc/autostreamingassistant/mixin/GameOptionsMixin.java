@@ -1,6 +1,6 @@
-package cn.cutemc.autofullscreen.mixin;
+package cn.cutemc.autostreamingassistant.mixin;
 
-import cn.cutemc.autofullscreen.AutoFullScreen;
+import cn.cutemc.autostreamingassistant.AutoStreamingAssistant;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.GameOptions;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,6 +17,6 @@ public class GameOptionsMixin {
     public void constructorInject(MinecraftClient client, File optionsFile, CallbackInfo ci) {
         GameOptions option = (GameOptions) (Object) this;
 
-        option.getFullscreen().setValue(AutoFullScreen.CONFIG.mainConfig.autoFullScreen);
+        option.getFullscreen().setValue(AutoStreamingAssistant.CONFIG.mainConfig.autoFullScreen);
     }
 }

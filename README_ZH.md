@@ -8,6 +8,7 @@
 - 指定显示游戏窗口的监视器
 - 保持窗口全屏
 - 保持窗口最大化
+- 禁用鼠标锁定
 
 ### 获取窗口名称：
 
@@ -44,7 +45,8 @@
         "autoFullScreen": true,
         "fullScreenMonitorName": "Generic PnP Monitor",
         "keepMaximizing": true,
-        "keepFullScreen": true
+        "keepFullScreen": true,
+        "disableMouseLock": true
     }
 
 或者你可以使用Mod的配置屏幕来修改配置。

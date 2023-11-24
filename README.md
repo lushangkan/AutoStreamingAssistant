@@ -3,7 +3,7 @@
 
 A Fabric Mod to make the game start up full screen on a given screen for Minecraft 1.20.2.
 
-[中文版](LICENSE)
+[中文版](README_ZH.md)
 
 ### Mod Functions:
 
@@ -11,6 +11,7 @@ A Fabric Mod to make the game start up full screen on a given screen for Minecra
 - Specify the monitor on which to display the game window
 - Keep window full screen
 - Keep window maximized
+- Disable mouse lock
 
 ### Get window name:
 
@@ -47,7 +48,8 @@ The config file is located in `.minecraft/config/autofullscreen.json`.
         "autoFullScreen": true,
         "fullScreenMonitorName": "Generic PnP Monitor",
         "keepMaximizing": true,
-        "keepFullScreen": true
+        "keepFullScreen": true,
+        "disableMouseLock": true
     }
 
 Or you can use the mod's config screen to change the config.

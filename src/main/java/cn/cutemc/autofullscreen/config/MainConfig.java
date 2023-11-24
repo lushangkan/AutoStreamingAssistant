@@ -13,4 +13,7 @@ public class MainConfig implements ConfigData {
     public boolean keepMaximizing = true;
 
     public boolean keepFullScreen = true;
+
+    public boolean disableMouseLock = true;
+
 }

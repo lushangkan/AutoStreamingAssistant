@@ -1,6 +1,6 @@
-package cn.cutemc.autofullscreen.config;
+package cn.cutemc.autostreamingassistant.config;
 
-import cn.cutemc.autofullscreen.listeners.ConfigListener;
+import cn.cutemc.autostreamingassistant.listeners.ConfigListener;
 import lombok.extern.log4j.Log4j2;
 import me.shedaniel.autoconfig.AutoConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
@@ -10,11 +10,12 @@ import me.shedaniel.autoconfig.serializer.GsonConfigSerializer;
 public class ModConfig {
 
     public MainConfig mainConfig;
+    public ConfigHolder<MainConfig> configHolder;
 
     public ModConfig() {
         AutoConfig.register(MainConfig.class, GsonConfigSerializer::new);
 
-        ConfigHolder<MainConfig> configHolder = AutoConfig.getConfigHolder(MainConfig.class);
+        configHolder = AutoConfig.getConfigHolder(MainConfig.class);
 
         mainConfig = configHolder.getConfig();
 

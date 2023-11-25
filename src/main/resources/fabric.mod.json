@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "autofullscreen",
+  "id": "autostreamingassistant",
   "version": "${version}",
-  "name": "AutoFullScreen",
-  "description": "Automatically displays the game in full screen on the specified screen.",
+  "name": "AutoStreamingAssistant",
+  "description": "Automatic live broadcast assistant",
   "authors": [
     "lushangkan"
   ],
@@ -12,18 +12,18 @@
     "repo": "https://github.com/lushangkan/AutoFullScreen"
   },
   "license": "GPL-3.0",
-  "icon": "assets/autofullscreen/icon.png",
+  "icon": "assets/autostreamingassistant/icon.png",
   "environment": "client",
   "entrypoints": {
     "client": [
-      "cn.cutemc.autofullscreen.AutoFullScreen"
+      "cn.cutemc.autostreamingassistant.AutoStreamingAssistant"
     ],
     "modmenu": [
-      "cn.cutemc.autofullscreen.config.ConfigMenuIntegration"
+      "cn.cutemc.autostreamingassistant.config.ConfigMenuIntegration"
     ]
   },
   "mixins": [
-    "autofullscreen.mixins.json"
+    "autostreamingassistant.mixins.json"
   ],
   "depends": {
     "fabricloader": ">=${loader_version}",

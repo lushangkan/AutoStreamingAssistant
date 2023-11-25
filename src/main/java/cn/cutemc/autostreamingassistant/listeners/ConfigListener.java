@@ -1,6 +1,6 @@
-package cn.cutemc.autofullscreen.listeners;
+package cn.cutemc.autostreamingassistant.listeners;
 
-import cn.cutemc.autofullscreen.config.MainConfig;
+import cn.cutemc.autostreamingassistant.config.MainConfig;
 import me.shedaniel.autoconfig.ConfigHolder;
 import me.shedaniel.autoconfig.event.ConfigSerializeEvent;
 import net.minecraft.client.MinecraftClient;
@@ -13,6 +13,7 @@ public class ConfigListener implements ConfigSerializeEvent.Load<MainConfig>, Co
     public ActionResult onLoad(ConfigHolder<MainConfig> configHolder, MainConfig mainConfig) {
         Mouse mouse = MinecraftClient.getInstance().mouse;
         if (!mouse.isCursorLocked() && !mainConfig.disableMouseLock) mouse.lockCursor();
+        if (mouse.isCursorLocked() && mainConfig.disableMouseLock) mouse.unlockCursor();
         return ActionResult.SUCCESS;
     }
 
@@ -20,6 +21,7 @@ public class ConfigListener implements ConfigSerializeEvent.Load<MainConfig>, Co
     public ActionResult onSave(ConfigHolder<MainConfig> configHolder, MainConfig mainConfig) {
         Mouse mouse = MinecraftClient.getInstance().mouse;
         if (!mouse.isCursorLocked() && !mainConfig.disableMouseLock) mouse.lockCursor();
+        if (mouse.isCursorLocked() && mainConfig.disableMouseLock) mouse.unlockCursor();
         return ActionResult.SUCCESS;
     }
 

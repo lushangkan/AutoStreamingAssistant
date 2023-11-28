@@ -3,6 +3,7 @@ package cn.cutemc.autostreamingassistant.mixin;
 import cn.cutemc.autostreamingassistant.AutoStreamingAssistant;
 import lombok.extern.log4j.Log4j2;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.world.ClientWorld;
 import org.lwjgl.glfw.GLFW;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -28,5 +29,15 @@ public class MinecraftClientMixin {
             client.getWindow().toggleFullscreen();
             client.options.getFullscreen().setValue(true);
         }
+    }
+
+    @Inject(method = "joinWorld(Lnet/minecraft/client/world/ClientWorld;)V", at = @At(value = "HEAD"))
+    private void joinWorldHeadInject(ClientWorld world, CallbackInfo ci) {
+        AutoStreamingAssistant.worldStatus.setLoading(true);
+    }
+
+    @Inject(method = "joinWorld(Lnet/minecraft/client/world/ClientWorld;)V", at = @At(value = "RETURN"))
+    private void joinWorldReturnInject(ClientWorld world, CallbackInfo ci) {
+        AutoStreamingAssistant.worldStatus.setLoading(false);
     }
 }

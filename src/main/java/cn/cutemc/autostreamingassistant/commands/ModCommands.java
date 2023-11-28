@@ -1,11 +1,16 @@
 package cn.cutemc.autostreamingassistant.commands;
 
+import cn.cutemc.autostreamingassistant.AutoStreamingAssistant;
 import com.mojang.brigadier.CommandDispatcher;
+import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.command.CommandRegistryAccess;
+import net.minecraft.command.CommandSource;
 import net.minecraft.text.MutableText;
 import net.minecraft.text.Text;
 import net.minecraft.text.TextColor;
@@ -23,8 +28,16 @@ public class ModCommands implements ClientCommandRegistrationCallback {
     public void register(CommandDispatcher<FabricClientCommandSource> dispatcher, CommandRegistryAccess registryAccess) {
         dispatcher.register(
                 ClientCommandManager.literal("autostreamingassistant").executes(this::mainCommand)
-                    .then(ClientCommandManager.literal("help").executes(this::helpCommand))
+                        .then(ClientCommandManager.literal("help").executes(this::helpCommand))
                         .then(ClientCommandManager.literal("listmonitor").executes(this::listMonitorCommand))
+                        .then(ClientCommandManager.literal("camera").executes(this::cameraCommand)
+                                .then(ClientCommandManager.literal("bind").then(ClientCommandManager.argument("target", StringArgumentType.string()).suggests((context, builder) -> {
+                                    ClientPlayerEntity clientPlayer = MinecraftClient.getInstance().player;
+                                    if (clientPlayer == null) throw new RuntimeException("ClientPlayer is null!");
+                                    return CommandSource.suggestMatching(clientPlayer.networkHandler.getPlayerList().stream().filter(player -> AutoStreamingAssistant.CAMERA.cameraPlayerUUID == null || !AutoStreamingAssistant.CAMERA.cameraPlayerUUID.equals(player.getProfile().getId())).map(player -> player.getProfile().getName()), builder);
+                                }).executes(this::bindCameraCommand)))
+                                .then(ClientCommandManager.literal("unbind").executes(this::unbindCameraCommand))
+                        )
         );
     }
 
@@ -38,7 +51,8 @@ public class ModCommands implements ClientCommandRegistrationCallback {
                 Text.translatable("commands.autostreamingassistant.help.title").append(": \n").styled(style -> style.withColor(TextColor.parse("gold")))
                         .append(Text.literal("● /autostreamingassistant help").styled(style -> style.withColor(TextColor.parse("dark_aqua")))).append(Text.literal(" - ")).append(Text.translatable("commands.autostreamingassistant.help.help.description").append("\n"))
                         .append(Text.literal("● /autostreamingassistant listmonitor").styled(style -> style.withColor(TextColor.parse("dark_aqua")))).append(Text.literal(" - ")).append(Text.translatable("commands.autostreamingassistant.help.listmonitor.description").append("\n"))
-
+                        .append(Text.literal("● /autostreamingassistant camera bind").styled(style -> style.withColor(TextColor.parse("dark_aqua")))).append(Text.literal(" - ")).append(Text.translatable("commands.autostreamingassistant.help.camera.bind.description").append("\n"))
+                        .append(Text.literal("● /autostreamingassistant camera unbind").styled(style -> style.withColor(TextColor.parse("dark_aqua")))).append(Text.literal(" - ")).append(Text.translatable("commands.autostreamingassistant.help.camera.unbind.description").append("\n"))
         );
         return 1;
     }
@@ -50,7 +64,7 @@ public class ModCommands implements ClientCommandRegistrationCallback {
         long primaryMonitor = GLFW.glfwGetPrimaryMonitor();
 
         if (buffer == null) {
-            source.sendFeedback(Text.translatable("commands.autostreamingassistant.help.listmonitor.notfound").styled(style -> style.withColor(TextColor.parse("red"))));
+            source.sendFeedback(Text.translatable("commands.autostreamingassistant.listmonitor.notfound").styled(style -> style.withColor(TextColor.parse("red"))));
             return 1;
         }
 
@@ -85,6 +99,32 @@ public class ModCommands implements ClientCommandRegistrationCallback {
         }
 
         source.sendFeedback(result);
+
+        return 1;
+    }
+
+    public int cameraCommand(CommandContext<FabricClientCommandSource> context) {
+        return helpCommand(context);
+    }
+
+    public int bindCameraCommand(CommandContext<FabricClientCommandSource> context) {
+        String targetName = StringArgumentType.getString(context, "target");
+
+        switch (AutoStreamingAssistant.CAMERA.bindCamera(targetName)) {
+            case NOT_FOUND_PLAYER -> context.getSource().sendFeedback(Text.translatable("commands.autostreamingassistant.camera.bind.notfound", targetName).styled(style -> style.withColor(TextColor.parse("red"))));
+            case NOT_AT_NEAR_BY -> context.getSource().sendFeedback(Text.translatable("commands.autostreamingassistant.camera.bind.notatnearby", targetName).styled(style -> style.withColor(TextColor.parse("yellow"))));
+            case SUCCESS -> context.getSource().sendFeedback(Text.translatable("commands.autostreamingassistant.camera.bind.bound", targetName).styled(style -> style.withColor(TextColor.parse("gold"))));
+
+        }
+
+        return 1;
+    }
+
+    public int unbindCameraCommand(CommandContext<FabricClientCommandSource> context) {
+        switch (AutoStreamingAssistant.CAMERA.unbindCamera()) {
+            case NOT_BOUND_CAMERA -> context.getSource().sendFeedback(Text.translatable("commands.autostreamingassistant.camera.unbind.notbound").styled(style -> style.withColor(TextColor.parse("red"))));
+            case SUCCESS -> context.getSource().sendFeedback(Text.translatable("commands.autostreamingassistant.camera.unbind.unbound").styled(style -> style.withColor(TextColor.parse("gold"))));
+        }
 
         return 1;
     }

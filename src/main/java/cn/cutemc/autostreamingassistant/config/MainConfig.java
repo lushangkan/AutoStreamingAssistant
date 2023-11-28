@@ -2,6 +2,7 @@ package cn.cutemc.autostreamingassistant.config;
 
 import me.shedaniel.autoconfig.ConfigData;
 import me.shedaniel.autoconfig.annotation.Config;
+import me.shedaniel.autoconfig.annotation.ConfigEntry;
 
 @Config(name = "autostreamingassistant")
 public class MainConfig implements ConfigData {
@@ -15,5 +16,8 @@ public class MainConfig implements ConfigData {
     public boolean keepFullScreen = true;
 
     public boolean disableMouseLock = true;
+
+    @ConfigEntry.Gui.Tooltip
+    public int findPlayerTimeout = 10;
 
 }

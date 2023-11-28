@@ -69,14 +69,4 @@ public class WindowMixin {
         return focused;
     }
 
-    @Inject(method = "<init>(Lnet/minecraft/client/WindowEventHandler;Lnet/minecraft/client/util/MonitorTracker;Lnet/minecraft/client/WindowSettings;Ljava/lang/String;Ljava/lang/String;)V", at = @At(value = "RETURN"))
-    private void constructorInject(WindowEventHandler eventHandler, MonitorTracker monitorTracker, WindowSettings settings, String videoMode, String title, CallbackInfo ci) {
-        AutoStreamingAssistant.windowTitle = title;
-    }
-
-    @Inject(method = "setTitle(Ljava/lang/String;)V", at = @At(value = "HEAD"))
-    private void setTitleInject(String title, CallbackInfo ci) {
-        AutoStreamingAssistant.windowTitle = title;
-    }
-
 }

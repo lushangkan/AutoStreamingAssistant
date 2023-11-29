@@ -1,12 +1,17 @@
 package cn.cutemc.autostreamingassistant.commands;
 
 import cn.cutemc.autostreamingassistant.AutoStreamingAssistant;
+import cn.cutemc.autostreamingassistant.network.ModPacketID;
+import cn.cutemc.autostreamingassistant.network.packets.ServerManualBindCameraPacket;
+import com.google.gson.Gson;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandRegistrationCallback;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.command.CommandRegistryAccess;
@@ -110,11 +115,19 @@ public class ModCommands implements ClientCommandRegistrationCallback {
     public int bindCameraCommand(CommandContext<FabricClientCommandSource> context) {
         String targetName = StringArgumentType.getString(context, "target");
 
+
         switch (AutoStreamingAssistant.CAMERA.bindCamera(targetName)) {
             case NOT_FOUND_PLAYER -> context.getSource().sendFeedback(Text.translatable("commands.autostreamingassistant.camera.bind.notfound", targetName).styled(style -> style.withColor(TextColor.parse("red"))));
             case NOT_AT_NEAR_BY -> context.getSource().sendFeedback(Text.translatable("commands.autostreamingassistant.camera.bind.notatnearby", targetName).styled(style -> style.withColor(TextColor.parse("yellow"))));
-            case SUCCESS -> context.getSource().sendFeedback(Text.translatable("commands.autostreamingassistant.camera.bind.bound", targetName).styled(style -> style.withColor(TextColor.parse("gold"))));
+            case SUCCESS -> {
+                context.getSource().sendFeedback(Text.translatable("commands.autostreamingassistant.camera.bind.bound", targetName).styled(style -> style.withColor(TextColor.parse("gold"))));
 
+                ServerManualBindCameraPacket packet = new ServerManualBindCameraPacket();
+                packet.setPlayerUuid(AutoStreamingAssistant.CAMERA.cameraPlayerUUID);
+                Gson gson = new Gson();
+
+                ClientPlayNetworking.send(ModPacketID.MANUAL_BIND_CAMERA, PacketByteBufs.empty().writeString(gson.toJson(packet)));
+            }
         }
 
         return 1;

@@ -13,6 +13,12 @@ Request client status.
 }
 ```
 
+- RequestBindStatus
+
+Request bind status.
+
+    No body.
+
 - BindCamera
 
 Bind the camera to a player.
@@ -41,6 +47,26 @@ Client status.
 {
   "status": "ready", // Enum: ClientStatus
   "version": "{{ version }}"
+}
+```
+
+- BindStatus
+
+Bind status.
+
+```json5
+{
+  "playerUuid": "{{ player's uuid }}" // Null if unbind
+}
+```
+
+- ManualBindCamera
+
+This packet is sent when the user binds manually using a command.
+
+```json5
+{
+  "playerUuid": "{{ player's uuid }}"
 }
 ```
 

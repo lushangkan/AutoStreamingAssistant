@@ -32,20 +32,18 @@ public class ClientBindCameraHandler implements ClientPlayNetworking.PlayChannel
         BindCameraMessage message = gson.fromJson(jsonStr, BindCameraMessage.class);
 
         Runnable thread = () -> {
-          Runnable bindCamera = () -> {
-              client.execute(() -> {
-                  BindResult result = AutoStreamingAssistant.CAMERA.bindCamera(message.getPlayerUuid());
+          Runnable bindCamera = () -> client.execute(() -> {
+              BindResult result = AutoStreamingAssistant.CAMERA.bindCamera(message.getPlayerUuid());
 
-                  BindCameraResultMessage resultMessage = new BindCameraResultMessage();
-                  resultMessage.setSuccess(result == BindResult.SUCCESS);
-                  resultMessage.setResult(result);
+              BindCameraResultMessage resultMessage = new BindCameraResultMessage();
+              resultMessage.setSuccess(result == BindResult.SUCCESS);
+              resultMessage.setResult(result);
 
-                  PacketByteBuf resultBuf = PacketByteBufs.empty();
-                  resultBuf.writeString(gson.toJson(resultMessage));
+              PacketByteBuf resultBuf = PacketByteBufs.empty();
+              resultBuf.writeString(gson.toJson(resultMessage));
 
-                  ClientPlayNetworking.send(ModPacketID.BIND_CAMERA_RESULT, resultBuf);
-              });
-          };
+              responseSender.sendPacket(ModPacketID.BIND_CAMERA_RESULT, resultBuf);
+          });
 
           if (client.world.getPlayers().stream().filter(player -> player.getUuid().equals(message.getPlayerUuid())).toList().size() != 1) {
               // 找不到玩家
@@ -71,7 +69,7 @@ public class ClientBindCameraHandler implements ClientPlayNetworking.PlayChannel
               PacketByteBuf resultBuf = PacketByteBufs.empty();
               resultBuf.writeString(gson.toJson(resultMessage));
 
-              ClientPlayNetworking.send(ModPacketID.BIND_CAMERA_RESULT, resultBuf);
+              responseSender.sendPacket(ModPacketID.BIND_CAMERA_RESULT, resultBuf);
 
               return;
           }

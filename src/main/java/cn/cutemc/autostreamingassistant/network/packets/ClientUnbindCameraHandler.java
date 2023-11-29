@@ -34,7 +34,7 @@ public class ClientUnbindCameraHandler implements ClientPlayNetworking.PlayChann
         PacketByteBuf packetByteBuf = PacketByteBufs.empty();
         packetByteBuf.writeString(jsonStr);
 
-        ClientPlayNetworking.send(ModPacketID.UNBIND_CAMERA_RESULT, packetByteBuf);
+        responseSender.sendPacket(ModPacketID.UNBIND_CAMERA_RESULT, packetByteBuf);
     }
 
     @Getter

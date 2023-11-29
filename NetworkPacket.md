@@ -3,6 +3,16 @@ Packets for server and client communication.
 
 ### ClientBoundPacket
 
+- RequestStatus
+
+Request client status.
+
+```json5
+{
+  "version": "{{ version }}"
+}
+```
+
 - BindCamera
 
 Bind the camera to a player.
@@ -22,6 +32,17 @@ Unbind the camera from player.
 ---
 
 ### ServerBoundPacket
+
+- ClientStatus
+
+Client status.
+
+```json5
+{
+  "status": "ready", // Enum: ClientStatus
+  "version": "{{ version }}"
+}
+```
 
 - BindCameraResponse
 

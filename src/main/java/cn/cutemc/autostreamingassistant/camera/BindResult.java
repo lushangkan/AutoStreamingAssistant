@@ -9,6 +9,10 @@ public enum BindResult {
 
     @Override
     public String toString() {
-        return name();
+        return name().toLowerCase();
+    }
+
+    public static BindResult fromString(String str) {
+        return valueOf(str.toUpperCase());
     }
 }

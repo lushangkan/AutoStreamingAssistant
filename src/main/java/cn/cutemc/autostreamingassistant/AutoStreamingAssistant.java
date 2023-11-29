@@ -12,11 +12,12 @@ import cn.cutemc.autostreamingassistant.network.packets.ClientUnbindCameraHandle
 import cn.cutemc.autostreamingassistant.utils.SystemUtils;
 import lombok.extern.log4j.Log4j2;
 import net.fabricmc.api.ClientModInitializer;
+import net.fabricmc.loader.api.FabricLoader;
 
 @Log4j2
 public class AutoStreamingAssistant implements ClientModInitializer {
 
-    public static AutoStreamingAssistant INSTANCE;
+    public static String VERSION;
     public static ModConfig CONFIG;
     public static ModKeyBinding KEYBINDING;
     public static Camera CAMERA;
@@ -27,9 +28,9 @@ public class AutoStreamingAssistant implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
 
-        INSTANCE = this;
-
         log.info("Loading AutoStreamingAssistant...");
+
+        VERSION = FabricLoader.getInstance().getModContainer("autostreamingassistant").get().getMetadata().getVersion().getFriendlyString();
 
         isLinuxMint = SystemUtils.isLinuxMint();
 

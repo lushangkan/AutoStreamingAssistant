@@ -1,7 +1,7 @@
 package cn.cutemc.autostreamingassistant.commands;
 
 import cn.cutemc.autostreamingassistant.AutoStreamingAssistant;
-import cn.cutemc.autostreamingassistant.network.ModPacketID;
+import cn.cutemc.autostreamingassistant.network.PacketID;
 import cn.cutemc.autostreamingassistant.network.packets.ServerManualBindCameraPacket;
 import com.google.gson.Gson;
 import com.mojang.brigadier.CommandDispatcher;
@@ -22,6 +22,8 @@ import net.minecraft.text.TextColor;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.glfw.GLFWVidMode;
+
+import java.nio.charset.StandardCharsets;
 
 public class ModCommands implements ClientCommandRegistrationCallback {
 
@@ -126,7 +128,7 @@ public class ModCommands implements ClientCommandRegistrationCallback {
                 packet.setPlayerUuid(AutoStreamingAssistant.CAMERA.cameraPlayerUUID);
                 Gson gson = new Gson();
 
-                ClientPlayNetworking.send(ModPacketID.MANUAL_BIND_CAMERA, PacketByteBufs.empty().writeString(gson.toJson(packet)));
+                ClientPlayNetworking.send(PacketID.MANUAL_BIND_CAMERA, PacketByteBufs.create().writeBytes(gson.toJson(packet).getBytes(StandardCharsets.UTF_8)));
             }
         }
 

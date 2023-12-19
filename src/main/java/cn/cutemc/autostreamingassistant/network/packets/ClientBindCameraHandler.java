@@ -2,7 +2,7 @@ package cn.cutemc.autostreamingassistant.network.packets;
 
 import cn.cutemc.autostreamingassistant.AutoStreamingAssistant;
 import cn.cutemc.autostreamingassistant.camera.BindResult;
-import cn.cutemc.autostreamingassistant.network.ModPacketID;
+import cn.cutemc.autostreamingassistant.network.PacketID;
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,12 +14,13 @@ import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.PacketByteBuf;
 
 import java.beans.PropertyChangeSupport;
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 public class ClientBindCameraHandler implements ClientPlayNetworking.PlayChannelHandler {
 
     public ClientBindCameraHandler() {
-        ClientPlayNetworking.registerGlobalReceiver(ModPacketID.BIND_CAMERA, this);
+        ClientPlayNetworking.registerGlobalReceiver(PacketID.BIND_CAMERA, this);
     }
 
     @Override
@@ -39,10 +40,10 @@ public class ClientBindCameraHandler implements ClientPlayNetworking.PlayChannel
               resultMessage.setSuccess(result == BindResult.SUCCESS);
               resultMessage.setResult(result);
 
-              PacketByteBuf resultBuf = PacketByteBufs.empty();
-              resultBuf.writeString(gson.toJson(resultMessage));
+              PacketByteBuf resultBuf = PacketByteBufs.create();
+              resultBuf.writeBytes(gson.toJson(resultMessage).getBytes(StandardCharsets.UTF_8));
 
-              responseSender.sendPacket(ModPacketID.BIND_CAMERA_RESULT, resultBuf);
+              responseSender.sendPacket(PacketID.BIND_CAMERA_RESULT, resultBuf);
           });
 
           if (client.world.getPlayers().stream().filter(player -> player.getUuid().equals(message.getPlayerUuid())).toList().size() != 1) {
@@ -66,10 +67,10 @@ public class ClientBindCameraHandler implements ClientPlayNetworking.PlayChannel
               resultMessage.setSuccess(false);
               resultMessage.setResult(BindResult.NOT_FOUND_PLAYER);
 
-              PacketByteBuf resultBuf = PacketByteBufs.empty();
-              resultBuf.writeString(gson.toJson(resultMessage));
+              PacketByteBuf resultBuf = PacketByteBufs.create();
+              resultBuf.writeBytes(gson.toJson(resultMessage).getBytes(StandardCharsets.UTF_8));
 
-              responseSender.sendPacket(ModPacketID.BIND_CAMERA_RESULT, resultBuf);
+              responseSender.sendPacket(PacketID.BIND_CAMERA_RESULT, resultBuf);
 
               return;
           }

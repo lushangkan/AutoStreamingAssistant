@@ -2,7 +2,7 @@ package cn.cutemc.autostreamingassistant.network.packets;
 
 import cn.cutemc.autostreamingassistant.AutoStreamingAssistant;
 import cn.cutemc.autostreamingassistant.camera.UnbindResult;
-import cn.cutemc.autostreamingassistant.network.ModPacketID;
+import cn.cutemc.autostreamingassistant.network.PacketID;
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,10 +13,12 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.PacketByteBuf;
 
+import java.nio.charset.StandardCharsets;
+
 public class ClientUnbindCameraHandler implements ClientPlayNetworking.PlayChannelHandler {
 
     public ClientUnbindCameraHandler() {
-        ClientPlayNetworking.registerGlobalReceiver(ModPacketID.UNBIND_CAMERA, this);
+        ClientPlayNetworking.registerGlobalReceiver(PacketID.UNBIND_CAMERA, this);
     }
 
     @Override
@@ -31,10 +33,10 @@ public class ClientUnbindCameraHandler implements ClientPlayNetworking.PlayChann
 
         String jsonStr = gson.toJson(message);
 
-        PacketByteBuf packetByteBuf = PacketByteBufs.empty();
-        packetByteBuf.writeString(jsonStr);
+        PacketByteBuf packetByteBuf = PacketByteBufs.create();
+        packetByteBuf.writeBytes(jsonStr.getBytes(StandardCharsets.UTF_8));
 
-        responseSender.sendPacket(ModPacketID.UNBIND_CAMERA_RESULT, packetByteBuf);
+        responseSender.sendPacket(PacketID.UNBIND_CAMERA_RESULT, packetByteBuf);
     }
 
     @Getter

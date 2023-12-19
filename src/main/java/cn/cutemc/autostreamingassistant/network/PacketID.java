@@ -2,7 +2,7 @@ package cn.cutemc.autostreamingassistant.network;
 
 import net.minecraft.util.Identifier;
 
-public class ModPacketID {
+public class PacketID {
 
     public static final Identifier REQUEST_STATUS = new Identifier("autostreamingassistant", "request_status");
     public static final Identifier REQUEST_BIND_STATUS = new Identifier("autostreamingassistant", "request_bind_status");

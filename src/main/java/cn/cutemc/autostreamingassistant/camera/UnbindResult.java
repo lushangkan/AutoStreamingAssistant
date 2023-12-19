@@ -6,6 +6,10 @@ public enum UnbindResult {
 
     @Override
     public String toString() {
-        return name();
+        return name().toLowerCase();
+    }
+
+    public static UnbindResult fromString(String str) {
+        return valueOf(str.toUpperCase());
     }
 }

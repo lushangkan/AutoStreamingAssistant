@@ -1,7 +1,7 @@
 package cn.cutemc.autostreamingassistant.network.packets;
 
 import cn.cutemc.autostreamingassistant.AutoStreamingAssistant;
-import cn.cutemc.autostreamingassistant.network.ModPacketID;
+import cn.cutemc.autostreamingassistant.network.PacketID;
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,12 +12,13 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.network.PacketByteBuf;
 
+import java.nio.charset.StandardCharsets;
 import java.util.UUID;
 
 public class ClientRequestBindStatusHandle implements ClientPlayNetworking.PlayChannelHandler {
 
     public ClientRequestBindStatusHandle() {
-        ClientPlayNetworking.registerGlobalReceiver(ModPacketID.REQUEST_BIND_STATUS, this);
+        ClientPlayNetworking.registerGlobalReceiver(PacketID.REQUEST_BIND_STATUS, this);
     }
 
     @Override
@@ -25,7 +26,7 @@ public class ClientRequestBindStatusHandle implements ClientPlayNetworking.PlayC
         BindStatusMessage bindStatusMessage = new BindStatusMessage();
         bindStatusMessage.setPlayerUuid(AutoStreamingAssistant.CAMERA.cameraPlayerUUID);
 
-        responseSender.sendPacket(ModPacketID.BIND_STATUS, PacketByteBufs.empty().writeString(new Gson().toJson(bindStatusMessage)));
+        responseSender.sendPacket(PacketID.BIND_STATUS, PacketByteBufs.create().writeBytes(new Gson().toJson(bindStatusMessage).getBytes(StandardCharsets.UTF_8)));
     }
 
     @Getter

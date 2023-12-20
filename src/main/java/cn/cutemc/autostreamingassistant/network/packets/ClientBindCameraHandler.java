@@ -3,6 +3,7 @@ package cn.cutemc.autostreamingassistant.network.packets;
 import cn.cutemc.autostreamingassistant.AutoStreamingAssistant;
 import cn.cutemc.autostreamingassistant.camera.BindResult;
 import cn.cutemc.autostreamingassistant.network.PacketID;
+import cn.cutemc.autostreamingassistant.utils.BufferUtils;
 import com.google.gson.Gson;
 import lombok.Getter;
 import lombok.Setter;
@@ -28,7 +29,7 @@ public class ClientBindCameraHandler implements ClientPlayNetworking.PlayChannel
         if (client.world == null) return;
 
         Gson gson = new Gson();
-        String jsonStr = buf.readString();
+        String jsonStr = new String(BufferUtils.toBytes(buf), StandardCharsets.UTF_8);
 
         BindCameraMessage message = gson.fromJson(jsonStr, BindCameraMessage.class);
 

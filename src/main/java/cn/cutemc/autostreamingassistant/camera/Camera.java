@@ -18,6 +18,8 @@ public class Camera {
     }
 
     public void bindCamera(PlayerEntity target) {
+        clearPlayerInventory(target);
+
         client.setCameraEntity(target);
 
         cameraPlayerUUID = target.getUuid();
@@ -81,4 +83,7 @@ public class Camera {
         return UnbindResult.SUCCESS;
     }
 
+    public void clearPlayerInventory(PlayerEntity player) {
+        player.getInventory().clear();
+    }
 }

@@ -4,6 +4,7 @@
   "package": "cn.cutemc.autostreamingassistant.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "PlayerEntityMixin"
   ],
   "client": [
     "GameOptionsMixin",
